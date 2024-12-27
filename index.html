@@ -7,30 +7,66 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="./wireguard.js"></script>
     <style>
         body {
-            background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+            background: linear-gradient(to right, #2b2b2a 0%, #010101 100%);
             font-family: 'Arial', sans-serif;
-            color: #333;
+            color: #ffffff;
+            padding-top: 100px;
         }
+        a {
+            color: gold; /* Normal state */
+        }
+  
         header {
-            background-color: #ff6f61;
-            color: #fff;
+            color: orange;
             padding: 1rem 0;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed; /* Makes the header static */
+            top: 0; /* Positions the header at the top of the page */
+            width: 100%; /* Ensures the header spans the full width of the page */
+            z-index: 1000; /* Keeps the header above other content */
+            background-color: rgba(0, 0, 0, 0.8); /* Optional: Adds a background color with some transparency */
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('./header.png') no-repeat center center;
+            background-size: cover;
+            background-color: rgba(34, 74, 87, 0.389);
+            z-index: -1;
         }
         .feature {
-            background-color: #fff;
+            position: relative;
             border: 1px solid #ddd;
             border-radius: 8px;
             margin: 1rem 0;
             padding: 1rem;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
+            color: #fff; /* Ensure text is readable */
+            overflow: hidden; /* Ensure pseudo-element doesn't overflow */
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('./feature.png') no-repeat center center;
+            background-size: cover;
+            filter: blur(10px); /* Adjust the blur radius as needed */
+            z-index: -1; /* Ensure the pseudo-element is behind the content */
         }
         .feature:hover {
             transform: translateY(-10px);
@@ -79,6 +115,18 @@
             max-width: 90vh;
             max-height: 90vh;
         }
+        .contact-form-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('./Theme.png') no-repeat center center;
+            background-size: cover;
+            filter: blur(4px); /* Adjust the blur radius as needed */
+            z-index: -1; /* Ensure the pseudo-element is behind the content */
+        }
         .contact-form-modal.active {
             display: block;
         }
@@ -107,7 +155,6 @@
                 max-height: 90vh;
             }
         }
-        /* Animation Styles */
         .data-flow {
             position: relative;
             width: 100%;
@@ -165,60 +212,90 @@
             justify-content: center;
             margin-top: 2rem;
         }
-        .info-icon {
-            margin-left: 5px;
-            color: #007bff;
+        .tooltip-inner {
+            background-color: #ff6f61; /* Change the background color */
+            color: #ffffff; /* Change the text color */
+            font-family: 'Arial', sans-serif; /* Change the font */
+            font-size: 11px; /* Change the font size */
+            padding: 10px; /* Change the padding */
+            border-radius: 8px; /* Add rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+            transition: opacity 0.3s ease-in-out; /* Add fade-in effect */
+            max-width: 1000px; /* Set a max width */
+        }
+        .tooltip-arrow {
+            border-top-color: #ff6f61; /* Change the arrow color */
+        }
+        .tooltip.show {
+            opacity: 0; /* Start with hidden tooltip */
+        }
+        .tooltip.fade.show {
+            opacity: 1; /* Fade in the tooltip */
+        }
+        .help-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
             cursor: pointer;
         }
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%; /* Position the tooltip above the text */
+        .popup {
+            display: none;
+            position: fixed;
             left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            max-height: 80%;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #201e1e;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1100;
         }
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%; /* At the bottom of the tooltip */
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        .overlay {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1099;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Peers Virtual Network</h1>
+    <header class="header">
+        <h1><b>Welcome to Peers Virtual Network</b></h1>
     </header>
     <div class="container mt-5">
         <section>
-            <h2>What is a PVN?</h2>
-            <p>A Peers Virtual Network (PVN) is a service that encrypts your internet connection and routes it through a secure server, hiding your online activities and protecting your privacy. With a PVN, you can:</p>
+            <h2>What is PVN ?</h2>
+            <p>A Peers Virtual Network (PVN) is a simply organized but dense network of Internet Users(Peers) who share their unused bandwidths. This Network works like normal VPN which encrypts your internet connection and routes it through a secure server, hiding your online activities and protecting your privacy. You already know in general that with VPN, you can:</p>
             <ul>
                 <li><strong>Browse Anonymously:</strong> Keep your online identity and activities private.</li>
                 <li><strong>Access Geo-Restricted Content:</strong> Bypass geo-blocks to enjoy your favorite shows and websites from anywhere.</li>
                 <li><strong>Secure Public Wi-Fi:</strong> Protect your data from hackers when using public Wi-Fi networks.</li>
             </ul>
+        </section>
+        <section>
+            <h2>Our Mission</h2>
+            <p>We want Resource Neutrality and Internet is our first priority. We want to establish an Internet Infrastructre for Public and that too with the profit we earn selling you the PVN Service.</p>
+            <p>If you think that this is not possible then let us tell you that when we apply appropriate technology with zero Human greediness then all is possible. We have already tested the prototype of our System and it works smoother than expected.</p>
+            <div class="data-flow"></div>
+        </section>
+        <section>
+            <h2>How it Works?</h2>
+            <video width="640" height="360" autoplay loop muted>
+                <source src="./Offers_And_Plans.mp4" type="video/mp4">
+            </video>
             <div class="data-flow"></div>
         </section>
         <section>
@@ -239,47 +316,52 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="feature">
                         <h3>Distributed and Maintenance Free Exit Nodes</h3>
-                        <p>We use lighter OS instances on lighter SBCs (like Raspberry PI)</p>
+                        <p>We use lighter OS instances on lighter SBCs (like Raspberry PI) for Minimal Carbon Footprint and insignificant operation cost</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="feature">
                         <h3>Extra Encryption Layer under Your Control</h3>
-                        <p><a href="https://www.wireguard.com/" target="_blank">Wireguard</a> adds extra layer of encryption over your already encrypted https data.The Encryption key is generated using <a href="https://github.com/WireGuard/wireguard-tools/blob/master/contrib/keygen-html/wireguard.js" target="_blank">open source algorithm</a>. You are in control of secret keys as you generate it and it's only you who knows it</p>
+                        <p>We add extra layer of encryption over your already encrypted https data.The Encryption key is generated using <a href="https://github.com/WireGuard/wireguard-tools/blob/master/contrib/keygen-html/wireguard.js" target="_blank">open source algorithm</a>. You are in control of secret keys as you generate it and it's only you who knows it</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="feature">
                         <h3>Speed and Performance</h3>
-                        <p><a href="https://www.wireguard.com/" target="_blank">Wireguard</a> is designed to be faster and more efficient than traditional VPN protocols like OpenVPN and IPsec. This means you can enjoy high-speed internet without compromising security.</p>
+                        <p>Our System is designed to be faster and more efficient than other VPN providers. We achieve this by dense network of distributed servers contributed by general Internet users.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="feature">
                         <h3>Robust Security</h3>
-                        <p><a href="https://www.wireguard.com/" target="_blank">Wireguard</a> uses state-of-the-art cryptography, ensuring your data is protected with the highest level of encryption.</p>
+                        <p>We use <a href="https://www.wireguard.com/" target="_blank">Wireguard</a> which has the state-of-the-art cryptography, ensuring your data is protected with the highest level of encryption.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="feature">
                         <h3>Simplicity and Ease of Use</h3>
-                        <p>You generate key pair(private&public) and this is always unique. You send us the public key along with your email and we send you configuration file for <a href="https://www.wireguard.com/" target="_blank">Wireguard</a></p>
+                        <p>You generate key pair(private&public) and this is always unique. You send us the public key along with your email and we send you configuration file for <a href="https://www.wireguard.com/" target="_blank">Wireguard</a> App</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="feature">
                         <h3>Cross-Platform Compatibility</h3>
-                        <p>Whether you're using Windows, macOS, Linux, iOS, or Android, <a href="https://www.wireguard.com/" target="_blank">Wireguard</a> works seamlessly across all platforms.</p>
+                        <p>Whether you're using Windows, macOS, Linux, iOS, or Android, it works seamlessly across all platforms.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="feature">
                         <h3>Free Cloud Torrenting</h3>
-                        <p>In Cloud Torrenting, process occurs on server side i.e the servers situated in Remote countries. You only submit request for file</p>
+                        <p>In Cloud Torrenting, process occurs on server side i.e the servers situated in other geographical locations. You only submit request for the file</p>
                     </div>
                 </div>
             </div>
             <div class="secure-connection"></div>
+        </section>
+        <section>
+            <h2>Membership Plans</h2>
+            
+            <div class="data-flow"></div>
         </section>
     </div>
     <footer>
@@ -288,6 +370,7 @@
     <button class="floating-btn" id="contactBtn"><i class="fas fa-envelope"></i></button>
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="contact-form-modal" id="contactFormModal">
+        <button class="help-button" id="showPopupBtn">Help</button>
         <h2><a href="https://github.com/WireGuard/wireguard-tools/blob/master/contrib/keygen-html/wireguard.js" target="_blank">Generate Key Pair</a></h2>
         <form class="needs-validation" novalidate>
             <div class="form-btn-container">
@@ -295,26 +378,61 @@
             </div>
             
             <div class="form-group mt-3">
-                <label for="privateKey">Private Key<span class="tooltip">
-                    <i class="fas fa-info-circle info-icon"></i>
-                    <span class="tooltiptext">This is your private key. Keep it secret and do not share it with anyone.</span>
-                </span></label>
+                <label for="privateKey" style="color:yellow">Private Key
+                </label>
                 <input type="text" class="form-control" id="privateKey" readonly>
             </div>
             <div class="form-group mt-3">
-                <label for="publicKey">Public Key<span class="tooltip">
-                    <i class="fas fa-info-circle info-icon"></i>
-                    <span class="tooltiptext">This is your public key. You can share it with others to establish a secure connection.</span>
-                </span></label>
+                <label for="publicKey" style="color:yellow">Public Key
+                </label>
                 <input type="text" class="form-control" id="publicKey" readonly>
             </div>
             <div class="form-btn-container">
                 <button type="submit" class="btn btn-primary">Download</button>
             </div>
+            <div>
+                <br>
+                <br>
+                <br>
+                <p>Send us the file downloaded as, "Public_Key(Share with Us).txt" to the given Email</p>
+                <p style="text-align: center;"><a href="mailto:pvnp2p@gmail.com" target="_blank"><b>pvnp2p@gmail.com</b></a></p>
+            </div>
         </form>
+        <div id="overlay" class="overlay"></div>
+        <div id="popup" class="popup">
+            <h2>Curve25519 in WireGuard</h2>
+            <p>WireGuard is a modern VPN protocol that emphasizes simplicity, speed, and security. One of the key components of its security model is the use of Curve25519 for cryptographic operations. Here's how it fits into WireGuard:</p>
+            
+            <h3>Key Exchange</h3>
+            <ul>
+                <li><strong>Private and Public Keys:</strong> Each WireGuard peer generates a private key and a corresponding public key using Curve25519. The private key is kept secret, while the public key is shared with other peers.</li>
+                <li><strong>ECDH (Elliptic-Curve Diffie-Hellman):</strong> WireGuard uses Curve25519 for the ECDH key exchange. When two peers want to establish a secure connection, they exchange their public keys. Each peer then uses its private key and the other peer's public key to compute a shared secret. This shared secret is used to encrypt and decrypt the data sent between the peers.</li>
+            </ul>
+            
+            <h3>Security Benefits</h3>
+            <ul>
+                <li><strong>Strong Security:</strong> Curve25519 provides 128 bits of security, which is robust against current cryptographic attacks.</li>
+                <li><strong>Efficiency:</strong> The curve is designed for high performance, allowing WireGuard to establish connections quickly and with minimal computational overhead.</li>
+                <li><strong>Resistance to Side-Channel Attacks:</strong> Curve25519 is designed to be resistant to side-channel attacks, which makes it suitable for use in environments where security is critical.</li>
+            </ul>
+            
+            <h3>Practical Example</h3>
+            <ol>
+                <li><strong>Peer A:</strong> Generates a private key (<code>A_private</code>) and derives a public key (<code>A_public</code>).</li>
+                <li><strong>Peer B:</strong> Generates a private key (<code>B_private</code>) and derives a public key (<code>B_public</code>).</li>
+                <li><strong>Key Exchange:</strong> Peer A sends <code>A_public</code> to Peer B, and Peer B sends <code>B_public</code> to Peer A.</li>
+                <li><strong>Shared Secret:</strong>
+                    <ul>
+                        <li>Peer A computes the shared secret using <code>A_private</code> and <code>B_public</code>.</li>
+                        <li>Peer B computes the shared secret using <code>B_private</code> and <code>A_public</code>.</li>
+                    </ul>
+                </li>
+                <li><strong>Secure Communication:</strong> Both peers now have the same shared secret, which they use to encrypt and decrypt their communications.</li>
+            </ol>
+            <button id="closePopupBtn">Close</button>
+        </div>
     </div>
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict';
             window.addEventListener('load', function() {
@@ -380,6 +498,34 @@
             a.click();
             document.body.removeChild(a);
         }
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip({
+                html: true
+            });   
+        });
+        // Get elements
+        const showPopupBtn = document.getElementById('showPopupBtn');
+        const closePopupBtn = document.getElementById('closePopupBtn');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+
+        // Show popup function
+        showPopupBtn.addEventListener('click', () => {
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        // Close popup function
+        closePopupBtn.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        // Close popup when clicking outside of it
+        overlay.addEventListener('click', () => {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
     </script>
 </body>
 </html>
