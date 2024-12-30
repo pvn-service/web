@@ -20,8 +20,10 @@
         a {
             color: gold; /* Normal state */
         }
-  
         header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             color: yellow;
             padding: 1rem 0;
             text-align: center;
@@ -72,13 +74,30 @@
             transform: translateY(-10px);
         }
         footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background-color: #ff6f61;
             color: #fff;
             text-align: center;
             padding: 1rem 0;
             box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
         }
-
+        .company-logo {
+            height: 50px;
+            animation: rotate 5s linear infinite;
+        }
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        footer p {
+            margin: 0; /* Remove default margin */
+        }
         .floating-btn {
             position: fixed;
             bottom: 20px;
@@ -355,7 +374,9 @@
 </head>
 <body>
     <header class="header">
+        <img src="company.png" alt="Logo" class="company-logo left">
         <h1><b>Welcome to Peers Virtual Network</b></h1>
+        <img src="company.png" alt="Logo" class="company-logo right">
     </header>
     <div class="container mt-5">
         <section>
@@ -628,6 +649,7 @@
         <h4 class="highlight">** This Website is completely static i.e we Don't collect any of the data to our system, you can check the source code <a href="https://github.com/pvn-service/web" target="_blank"><b>here</b></a> **</h4>
     </div>
     <footer>
+        <img src="company.png" alt="Logo" class="company-logo left">
         <p>&copy; 2024 Peers Virtual Network (PVN). All rights reserved.</p>
     </footer>
     <button class="floating-btn" id="contactBtn"><i class="fas fa-user-plus"></i></button>
