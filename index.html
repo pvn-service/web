@@ -22,7 +22,7 @@
         }
   
         header {
-            color: orange;
+            color: yellow;
             padding: 1rem 0;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -78,12 +78,13 @@
             padding: 1rem 0;
             box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .floating-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #ff6f61;
-            color: #fff;
+            background-color: yellowgreen;
+            color: white;
             border: none;
             border-radius: 50%;
             width: 60px;
@@ -93,12 +94,24 @@
             justify-content: center;
             font-size: 24px;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-45px);
+            }
+            60% {
+                transform: translateY(-20px);
+            }
         }
         .floating-btn:hover {
-            transform: scale(1.1);
+            background-color: lightblue;
         }
+
         .contact-form-modal {
             display: none;
             position: fixed;
@@ -269,6 +282,93 @@
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1099;
         }
+        .plan {
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 1rem 0;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            color: #fff; /* Ensure text is readable */
+            overflow: hidden; /* Ensure pseudo-element doesn't overflow */
+        }
+        .plan::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('plans.png') no-repeat center center;
+            background-size: cover;
+            filter: blur(20px); /* Adjust the blur radius as needed */
+            z-index: -1; /* Ensure the pseudo-element is behind the content */
+        }
+        .plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .plan h2 {
+            margin-top: 0;
+            color: #ffffff;
+        }
+        .plan ul {
+            list-style: none;
+            padding: 0;
+        }
+        .plan ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            color:yellow;
+        }
+        .plan ul li:last-child {
+            border-bottom: none;
+        }
+        .plan ul li i {
+            margin-right: 10px;
+            color: #007bff;
+        }
+        .coupon {
+            display: flex;
+            align-items: baseline;
+            position: relative;
+        }
+        .coupon input {
+            border: 1px solid #ddd;
+            padding: 5px;
+            width: 100px;
+        }
+        .coupon button {
+            background-color: transparent;
+            border: 1px solid #ddd;
+            border-left: none;
+            padding: 5px;
+            cursor: pointer;
+            color: #007bff;
+            width: 40px;
+        }
+        .coupon button:focus, .coupon button:hover {
+            background-color: transparent;
+            outline: none;
+        }
+        .highlight {
+            color: white;
+            background-color: red;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            animation: highlightAnimation 2s infinite;
+        }
+
+        @keyframes highlightAnimation {
+            0% { background-color: rgb(19, 128, 79); }
+            50% { background-color: rgb(104, 104, 15); }
+            100% { background-color: rgb(19, 128, 79); }
+        }
     </style>
 </head>
 <body>
@@ -292,19 +392,24 @@
             <div class="data-flow"></div>
         </section>
         <section>
-            <h2>How it Works?</h2>
-            <video width="640" height="360" autoplay loop muted>
-                <source src="Offers_And_Plans.mp4" type="video/mp4">
-            </video>
-            <div class="data-flow"></div>
-        </section>
-        <section>
             <h2>Why Choose Us?</h2>
             <div class="row">
                 <div class="col-md-6 col-lg-4">
                     <div class="feature">
                         <h3>World's Best Technologies at Your Disposal</h3>
                         <p>We only put together the best technologies. We did not develop the App(<a href="https://www.wireguard.com/" target="_blank">Wireguard</a>). It's open source App developed and maintained by the best developer's around the Globe. We have nothing to hide. We use <a href="https://www.wireguard.com/" target="_blank">Wireguard</a> protocol as our veins, Debian OS as our hearts and rest is Python for management</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature">
+                        <h3>KISS</h3>
+                        <p>We have designed the system to serve its purpose without asking Signin/Signup.We use Email systems for interaction. We as an architect always adhere to Keep It Simple and Stupid(KISS) </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature">
+                        <h3>Ads/Tracking Blocker</h3>
+                        <p>We have <a href="https://pi-hole.net/" target="_blank">PI-Hole</a> as Blocker service. We are always happy to incorporate your custom blocking actions for example blocking Malicious scripts, Ads, Adult Content etc.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
@@ -359,22 +464,198 @@
             <div class="secure-connection"></div>
         </section>
         <section>
-            <h2>Membership Plans</h2>
-            
-            <div class="data-flow"></div>
+            <h2>General Plans</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Weekly @1($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i> 2 Device</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="G-WEEKLY05" readonly>
+                            <button onclick="copyCoupon('G-WEEKLY05', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>                    
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Monthly @5($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i> 2 Devices</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="G-MONTHLY10" readonly>
+                            <button onclick="copyCoupon('G-MONTHLY10', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>              
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Quarterly @10($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i> 3 Devices</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="G-QUARTERLY20" readonly>
+                            <button onclick="copyCoupon('G-QUARTERLY20', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>                 
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Half-Yearly @15($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i>3 Devices</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="G-HALFYEARLY35" readonly>
+                            <button onclick="copyCoupon('G-HALFYEARLY35', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>                 
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Yearly @20($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i>3 Devices(Can be increased)</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="G-YEARLY50" readonly>
+                            <button onclick="copyCoupon('G-YEARLY50', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>               
+                    </div>
+                </div>
+            </div>
+        </section>        
+        <section>
+            <br>
+            <br>
+            <h2>Premium Plans</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Weekly @3($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i> 2 Device</li>
+                            <li><i class="fas fa-wifi"></i> Unlimited Bandwidth</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-video"></i> Streaming Priority</li>
+                            <li><i class="fas fa-cloud-download-alt"></i> Cloud Torrenting</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="P-WEEKLY05" readonly>
+                            <button onclick="copyCoupon('P-WEEKLY05', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>                  
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Monthly @10($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i> 2 Devices</li>
+                            <li><i class="fas fa-wifi"></i> Unlimited Bandwidth</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-video"></i> Streaming Priority</li>
+                            <li><i class="fas fa-cloud-download-alt"></i> Cloud Torrenting</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="P-MONTHLY10" readonly>
+                            <button onclick="copyCoupon('P-MONTHLY10', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>            
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Quarterly @20($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i> 3 Devices</li>
+                            <li><i class="fas fa-wifi"></i> Unlimited Bandwidth</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-video"></i> Streaming Priority</li>
+                            <li><i class="fas fa-cloud-download-alt"></i> Cloud Torrenting</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="P-QUARTERLY20" readonly>
+                            <button onclick="copyCoupon('P-QUARTERLY20', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>                
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Half-Yearly @35($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i>3 Devices</li>
+                            <li><i class="fas fa-wifi"></i> Unlimited Bandwidth</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-video"></i> Streaming Priority</li>
+                            <li><i class="fas fa-cloud-download-alt"></i> Cloud Torrenting</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="P-HALFYEARLY35" readonly>
+                            <button onclick="copyCoupon('P-HALFYEARLY35', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>                
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan">
+                        <h3>Yearly @50($/€)</h3>
+                        <ul>
+                            <li><i class="fas fa-mobile-alt"></i>3 Devices(Can be increased)</li>
+                            <li><i class="fas fa-wifi"></i> Unlimited Bandwidth</li>
+                            <li><i class="fas fa-ban"></i> Ads Blocker</li>
+                            <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-video"></i> Streaming Priority</li>
+                            <li><i class="fas fa-cloud-download-alt"></i> Cloud Torrenting</li>
+                        </ul>
+                        <div class="coupon">
+                            <input type="text" value="P-YEARLY50" readonly>
+                            <button onclick="copyCoupon('P-YEARLY50', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <div class="popup">Copied!</div>
+                        </div>            
+                    </div>
+                </div>
+            </div>
         </section>
+        <div class="data-flow"></div> 
+        <br>
+        <br>
+        <h4 class="highlight">** This Website is completely static i.e we Don't collect any of the data to our system, you can check the source code <a href="https://github.com/pvn-service/web" target="_blank"><b>here</b></a> **</h4>
     </div>
     <footer>
         <p>&copy; 2024 Peers Virtual Network (PVN). All rights reserved.</p>
     </footer>
-    <button class="floating-btn" id="contactBtn"><i class="fas fa-envelope"></i></button>
+    <button class="floating-btn" id="contactBtn"><i class="fas fa-user-plus"></i></button>
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="contact-form-modal" id="contactFormModal">
         <button class="help-button" id="showPopupBtn">Help</button>
         <h2><a href="https://github.com/WireGuard/wireguard-tools/blob/master/contrib/keygen-html/wireguard.js" target="_blank">Generate Key Pair</a></h2>
         <form class="needs-validation" novalidate>
             <div class="form-btn-container">
-                <button type="button" class="btn btn-secondary" id="generateKeysBtn">Generate Keys</button>
+                <button type="button" class="btn btn-success" id="generateKeysBtn">Generate Keys</button>
             </div>
             
             <div class="form-group mt-3">
@@ -394,8 +675,8 @@
                 <br>
                 <br>
                 <br>
-                <p>Send us the file downloaded as, "Public_Key(Share with Us).txt" to the given Email</p>
-                <p style="text-align: center;"><a href="mailto:pvnp2p@gmail.com" target="_blank"><b>pvnp2p@gmail.com</b></a></p>
+                <p>Send us the file downloaded as, "Public_Key(Share with Us).txt" to the email:- pvnp2p@gmail.com</p>
+                <p style="text-align: center;">Or to use already prepared Email content click <a href="#" onclick="sendEmail()"><b>Here</b></a></p>
             </div>
         </form>
         <div id="overlay" class="overlay"></div>
@@ -433,6 +714,7 @@
         </div>
     </div>
     <script>
+        var coupon_code;
         (function() {
             'use strict';
             window.addEventListener('load', function() {
@@ -503,29 +785,52 @@
                 html: true
             });   
         });
-        // Get elements
+
         const showPopupBtn = document.getElementById('showPopupBtn');
         const closePopupBtn = document.getElementById('closePopupBtn');
         const popup = document.getElementById('popup');
         const overlay = document.getElementById('overlay');
 
-        // Show popup function
         showPopupBtn.addEventListener('click', () => {
             popup.style.display = 'block';
             overlay.style.display = 'block';
         });
 
-        // Close popup function
+
         closePopupBtn.addEventListener('click', () => {
             popup.style.display = 'none';
             overlay.style.display = 'none';
         });
 
-        // Close popup when clicking outside of it
         overlay.addEventListener('click', () => {
             popup.style.display = 'none';
             overlay.style.display = 'none';
         });
+        function copyCoupon(code, parent_element) {
+            coupon_elem = parent_element.firstElementChild
+            coupon_code=coupon_elem.value
+            navigator.clipboard.writeText(coupon_code).then(() => {
+                coupon_elem.style.backgroundColor = "orange"
+                setTimeout(() => {
+                    coupon_elem.style.backgroundColor = "white";
+                }, 2000);
+            });
+        }
+        function sendEmail() {
+            if (!coupon_code) {
+                alert("Coupon Code is missing!, Click on copy button near coupon code");
+                return;
+            }
+            public_key=document.getElementById('publicKey').value
+            if (!public_key) {
+                alert("Public Key is missing!, Click on 'Generate Keys' button");
+                return;
+            }            
+            var subject = encodeURIComponent(coupon_code);
+            var body = encodeURIComponent(`Dear Team,\n\nPublicKey = ${public_key}\nI want to be a Member of PVN\n\nRegards,\n[Your Full Name]`);
+            var mailtoLink = `mailto:pvnp2p@gmail.com?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+        }
     </script>
 </body>
 </html>
