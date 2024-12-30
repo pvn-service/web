@@ -401,6 +401,9 @@
             50% { background-color: rgb(104, 104, 15); }
             100% { background-color: rgb(19, 128, 79); }
         }
+        body.no-scroll {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -795,10 +798,12 @@
             if (action=="show"){
                 document.getElementById('contactFormModal').classList.add('active');
                 document.getElementById('modalBackdrop').classList.add('active');
+                document.body.classList.add('no-scroll');
             }
             else{
                 document.getElementById('contactFormModal').classList.remove('active');
                 document.getElementById('modalBackdrop').classList.remove('active');
+                document.body.classList.remove('no-scroll');
             }
         }
         
