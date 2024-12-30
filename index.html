@@ -118,7 +118,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #fff;
+            background-color: yellowgreen;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -127,6 +127,7 @@
             height: 80vw;
             max-width: 90vh;
             max-height: 90vh;
+            overflow-y: auto;
         }
         .contact-form-modal::before {
             content: '';
@@ -136,7 +137,8 @@
             right: 0;
             bottom: 0;
             background: url('Theme.png') no-repeat center center;
-            background-size: cover;
+            background-size: cover; /* Ensure the image covers the entire area */
+            background-attachment:initial;
             filter: blur(4px); /* Adjust the blur radius as needed */
             z-index: -1; /* Ensure the pseudo-element is behind the content */
         }
@@ -224,26 +226,6 @@
             display: flex;
             justify-content: center;
             margin-top: 2rem;
-        }
-        .tooltip-inner {
-            background-color: #ff6f61; /* Change the background color */
-            color: #ffffff; /* Change the text color */
-            font-family: 'Arial', sans-serif; /* Change the font */
-            font-size: 11px; /* Change the font size */
-            padding: 10px; /* Change the padding */
-            border-radius: 8px; /* Add rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
-            transition: opacity 0.3s ease-in-out; /* Add fade-in effect */
-            max-width: 1000px; /* Set a max width */
-        }
-        .tooltip-arrow {
-            border-top-color: #ff6f61; /* Change the arrow color */
-        }
-        .tooltip.show {
-            opacity: 0; /* Start with hidden tooltip */
-        }
-        .tooltip.fade.show {
-            opacity: 1; /* Fade in the tooltip */
         }
         .about-button {
             position: absolute;
@@ -674,9 +656,10 @@
             <div>
                 <br>
                 <br>
-                <br>
-                <p>Send us the file downloaded as, "Public_Key(Share with Us).txt" to the email:- pvnp2p@gmail.com</p>
-                <p style="text-align: center;">Or to use already prepared Email content click <a href="#" onclick="sendEmail()"><b>Here</b></a></p>
+                <p style="text-align: center;background-color:grey">Use the already prepared Email content, click <a href="#" onclick="sendEmail()"><b>Here</b></a></p>
+                <p style="text-align: center;">OR</p>
+                <p style="text-align: center;">Send us the file downloaded as, "Public_Key(Share with Us).txt" to pvnp2p@gmail.com</p>
+                
             </div>
         </form>
         <div id="overlay" class="overlay"></div>
@@ -780,11 +763,6 @@
             a.click();
             document.body.removeChild(a);
         }
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip({
-                html: true
-            });   
-        });
 
         const showPopupBtn = document.getElementById('showPopupBtn');
         const closePopupBtn = document.getElementById('closePopupBtn');
