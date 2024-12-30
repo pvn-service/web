@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!-- Developed by TinToSer(https://github.com/tintoser) -->
+<!-- Copyright TinToSer(https://github.com/tintoser) -->
+<!-- Fully Developed with Microsoft Copilot Free version -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -98,10 +101,24 @@
         footer p {
             margin: 0; /* Remove default margin */
         }
-        .floating-btn {
+        .floating-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bounce 2s infinite;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: yellowgreen;
+        }
+
+        .floating-btn {
             background-color: yellowgreen;
             color: white;
             border: none;
@@ -114,17 +131,17 @@
             font-size: 24px;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: bounce 2s infinite;
         }
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateY(0);
             }
             40% {
-                transform: translateY(-45px);
+                transform: translateY(-20px);
             }
             60% {
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
         }
         .floating-btn:hover {
@@ -163,6 +180,11 @@
         }
         .contact-form-modal.active {
             display: block;
+        }
+        .form-menu{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         .modal-backdrop {
             display: none;
@@ -246,8 +268,17 @@
             justify-content: center;
             margin-top: 2rem;
         }
+        .close-button {
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: red;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
         .about-button {
-            position: absolute;
             top: 10px;
             right: 10px;
             padding: 5px 10px;
@@ -466,7 +497,7 @@
             </div>
             <div class="secure-connection"></div>
         </section>
-        <section>
+        <section id="membership">
             <h2>General Plans</h2>
             <div class="row">
                 <div class="col-md-6 col-lg-4">
@@ -652,16 +683,21 @@
         <img src="company.png" alt="Logo" class="company-logo left">
         <p>&copy; 2024 Peers Virtual Network (PVN). All rights reserved.</p>
     </footer>
-    <button class="floating-btn" id="contactBtn"><i class="fas fa-user-plus"></i></button>
+    <div class="floating-container">
+        <p class="vertical-text">Join Us</p>
+        <button id="contactBtn" class="floating-btn"><i class="fas fa-user-plus"></i></button>
+    </div>
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="contact-form-modal" id="contactFormModal">
-        <button class="about-button" id="showPopupBtn">About</button>
-        <h2><a href="https://github.com/WireGuard/wireguard-tools/blob/master/contrib/keygen-html/wireguard.js" target="_blank">Generate Key Pair</a></h2>
+        <div class="form-menu">
+            <button class="close-button" id="closeFormBtn">Close</button>
+            <button class="about-button" id="showPopupBtn">About</button>
+        </div>
+        <h2 style="text-align: center;"><a href="https://github.com/WireGuard/wireguard-tools/blob/master/contrib/keygen-html/wireguard.js" target="_blank">Generate Key Pair</a></h2>
         <form class="needs-validation" novalidate>
             <div class="form-btn-container">
                 <button type="button" class="btn btn-success" id="generateKeysBtn">Generate Keys</button>
             </div>
-            
             <div class="form-group mt-3">
                 <label for="privateKey" style="color:yellow">Private Key
                 </label>
@@ -744,18 +780,28 @@
             }, false);
         })();
 
-        // Floating button and modal functionality
+
         document.getElementById('contactBtn').addEventListener('click', function() {
-            document.getElementById('contactFormModal').classList.add('active');
-            document.getElementById('modalBackdrop').classList.add('active');
+            formDisplay("show")
         });
 
         document.getElementById('modalBackdrop').addEventListener('click', function() {
-            document.getElementById('contactFormModal').classList.remove('active');
-            document.getElementById('modalBackdrop').classList.remove('active');
+            formDisplay("hide")
         });
-
-        // Generate WireGuard keys
+        document.getElementById('closeFormBtn').addEventListener('click', function() {
+            formDisplay("hide")
+        });
+        function formDisplay(action){
+            if (action=="show"){
+                document.getElementById('contactFormModal').classList.add('active');
+                document.getElementById('modalBackdrop').classList.add('active');
+            }
+            else{
+                document.getElementById('contactFormModal').classList.remove('active');
+                document.getElementById('modalBackdrop').classList.remove('active');
+            }
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('generateKeysBtn').addEventListener('click', function() {
                 var keyPair = wireguard.generateKeypair();
@@ -819,6 +865,10 @@
         function sendEmail() {
             if (!coupon_code) {
                 alert("Coupon Code is missing!, Click on copy button near coupon code");
+                formDisplay("hide")
+                setTimeout(() => {
+                    document.getElementById('membership').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
                 return;
             }
             public_key=document.getElementById('publicKey').value
