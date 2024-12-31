@@ -404,6 +404,29 @@
         body.no-scroll {
             overflow: hidden;
         }
+        .offers-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 40px;
+        }
+        .offers {
+            font-size: 25px;
+            color: yellowgreen;
+            margin-top: 5px;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
     </style>
 </head>
 <body>
@@ -498,8 +521,15 @@
                     </div>
                 </div>
             </div>
-            <div class="secure-connection"></div>
+
         </section>
+        <div class="secure-connection"></div>
+        <div class="offers-container">
+            <div class="offers">
+                Refer and get recurrent 10% of the Membership Plan! | Free 3 Days Trial for New Users.
+            </div>
+        </div>
+        <div class="secure-connection"></div>
         <section id="membership">
             <h2>General Plans</h2>
             <div class="row">
