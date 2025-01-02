@@ -167,16 +167,17 @@
         }
         .contact-form-modal::before {
             content: '';
-            position: absolute;
+            position:absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: url('Theme.png') no-repeat center center;
-            background-size: cover; /* Ensure the image covers the entire area */
+            background-size: cover;
             background-attachment:initial;
             filter: blur(4px); /* Adjust the blur radius as needed */
             z-index: -1; /* Ensure the pseudo-element is behind the content */
+            height: 850px;
         }
         .contact-form-modal.active {
             display: block;
@@ -199,17 +200,12 @@
         .modal-backdrop.active {
             display: block;
         }
-        @media (max-width: 1200px) {
+        @media (max-width: 600px) {
             .feature {
                 margin: 1rem 0;
                 padding: 1rem;
             }
-            .contact-form-modal {
-                width: 90vw;
-                height: 90vw;
-                max-width: 90vh;
-                max-height: 90vh;
-            }
+
         }
         .data-flow {
             position: relative;
@@ -404,6 +400,37 @@
         body.no-scroll {
             overflow: hidden;
         }
+        @keyframes wave {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-40px);
+            }
+        }
+
+        .offers-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .dancing-text span {
+            justify-content: center;
+            display: inline-block;
+            align-items: center;
+            animation: wave 1s infinite;
+            font-size: 1.5em;
+        }
+
+        .dancing-text span:nth-child(1) { animation-delay: 0s; color: rgb(145, 255, 0); }
+        .dancing-text span:nth-child(2) { animation-delay: 0.1s; color: orange; }
+        .dancing-text span:nth-child(3) { animation-delay: 0.2s; color: yellow; }
+        .dancing-text span:nth-child(4) { animation-delay: 0.3s; color: green; }
+        .dancing-text span:nth-child(5) { animation-delay: 0.4s; color: red; }
+        .dancing-text span:nth-child(6) { animation-delay: 0.5s; color: purple; }
+        .dancing-text span:nth-child(7) { animation-delay: 0.6s; color: pink; }
+
         .offers-container {
             width: 100%;
             overflow: hidden;
@@ -411,13 +438,13 @@
             height: 40px;
         }
         .offers {
-            font-size: 25px;
+            display: inline-block;
+            font-size: 25px; /* Adjust this font size if needed */
             color: yellowgreen;
             margin-top: 5px;
-            overflow: hidden;
             white-space: nowrap;
             box-sizing: border-box;
-            animation: marquee 20s linear infinite;
+            animation: marquee 30s linear infinite;
         }
         @keyframes marquee {
             0% {
@@ -427,6 +454,7 @@
                 transform: translateX(-100%);
             }
         }
+
     </style>
 </head>
 <body>
@@ -523,7 +551,16 @@
             </div>
 
         </section>
+        
         <div class="secure-connection"></div>
+
+        <div class="offers-header" id="offers">
+            <h2 class="dancing-text">
+                <span>O</span><span>f</span><span>f</span><span>e</span><span>r</span><span>s</span><span>!</span>
+            </h2>
+        </div>
+
+        
         <div class="offers-container">
             <div class="offers">
                 Refer and get recurrent 10% of the Membership Plan! | Free 3 Days Trial for New Users.
@@ -540,6 +577,7 @@
                             <li><i class="fas fa-mobile-alt"></i> 2 Devices</li>
                             <li><i class="fas fa-ban"></i> Ads Blocker</li>
                             <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-tachometer-alt"></i> Faster Speed (can stream)</li>
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-WEEKLY05" readonly>
@@ -552,9 +590,10 @@
                     <div class="plan">
                         <h3>Monthly @5($/€)</h3>
                         <ul>
-                            <li><i class="fas fa-mobile-alt"></i> 2 Devices</li>
+                            <li><i class="fas fa-mobile-alt"></i> 3 Devices</li>
                             <li><i class="fas fa-ban"></i> Ads Blocker</li>
                             <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-tachometer-alt"></i> Faster Speed (can stream)</li>
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-MONTHLY10" readonly>
@@ -570,6 +609,7 @@
                             <li><i class="fas fa-mobile-alt"></i> 3 Devices</li>
                             <li><i class="fas fa-ban"></i> Ads Blocker</li>
                             <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-tachometer-alt"></i> Faster Speed (can stream)</li>
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-QUARTERLY20" readonly>
@@ -582,9 +622,10 @@
                     <div class="plan">
                         <h3>Half-Yearly @15($/€)</h3>
                         <ul>
-                            <li><i class="fas fa-mobile-alt"></i>3 Devices</li>
+                            <li><i class="fas fa-mobile-alt"></i>5 Devices</li>
                             <li><i class="fas fa-ban"></i> Ads Blocker</li>
                             <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-tachometer-alt"></i> Faster Speed (can stream)</li>
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-HALFYEARLY35" readonly>
@@ -597,9 +638,10 @@
                     <div class="plan">
                         <h3>Yearly @20($/€)</h3>
                         <ul>
-                            <li><i class="fas fa-mobile-alt"></i>3 Devices(Can be increased)</li>
+                            <li><i class="fas fa-mobile-alt"></i>5 Devices</li>
                             <li><i class="fas fa-ban"></i> Ads Blocker</li>
                             <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
+                            <li><i class="fas fa-tachometer-alt"></i> Faster Speed (can stream)</li>
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-YEARLY50" readonly>
@@ -637,7 +679,7 @@
                     <div class="plan">
                         <h3>Monthly @10($/€)</h3>
                         <ul>
-                            <li><i class="fas fa-mobile-alt"></i> 2 Devices</li>
+                            <li><i class="fas fa-mobile-alt"></i> 3 Devices</li>
                             <li><i class="fas fa-wifi"></i> Data quota 400GB</li>
                             <li><i class="fas fa-ban"></i> Ads Blocker</li>
                             <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
@@ -655,7 +697,7 @@
                     <div class="plan">
                         <h3>Quarterly @20($/€)</h3>
                         <ul>
-                            <li><i class="fas fa-mobile-alt"></i> 3 Devices</li>
+                            <li><i class="fas fa-mobile-alt"></i> 5 Devices</li>
                             <li><i class="fas fa-wifi"></i> Data quota 400GB/pm</li>
                             <li><i class="fas fa-ban"></i> Ads Blocker</li>
                             <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
@@ -673,7 +715,7 @@
                     <div class="plan">
                         <h3>Half-Yearly @35($/€)</h3>
                         <ul>
-                            <li><i class="fas fa-mobile-alt"></i>3 Devices</li>
+                            <li><i class="fas fa-mobile-alt"></i>5 Devices</li>
                             <li><i class="fas fa-wifi"></i> Data quota 400GB/pm</li>
                             <li><i class="fas fa-ban"></i> Ads Blocker</li>
                             <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
@@ -691,7 +733,7 @@
                     <div class="plan">
                         <h3>Yearly @50($/€)</h3>
                         <ul>
-                            <li><i class="fas fa-mobile-alt"></i>3 Devices(Can be increased)</li>
+                            <li><i class="fas fa-mobile-alt"></i>5 Devices</li>
                             <li><i class="fas fa-wifi"></i> Data quota 400GB/pm</li>
                             <li><i class="fas fa-ban"></i> Ads Blocker</li>
                             <li><i class="fas fa-shield-alt"></i> Tracking Prevention</li>
@@ -747,10 +789,10 @@
             <div>
                 <br>
                 <br>
-                <p style="text-align: center;background-color:grey">To Subscribe quickly, click <a href="#" onclick="sendEmail()"><b>Here</b></a>. It will open your Email Client.</p>
+                <p style="text-align: center;background-color:grey">To Subscribe quickly, first download the keys by clicking on 'Download' button and then click <a href="#" onclick="sendEmail()"><b>Here</b></a>, it will open Email client and insert needed information.</p>
                 <p style="text-align: center;">OR</p>
                 <p style="text-align: center;">Send us the file downloaded as, "Public_Key(Share with Us).txt" as attachment and Coupon code as subject to pvnp2p@gmail.com</p>
-                
+                <p style="text-align: center;">Don't worry about Payment or further steps, we will contact via Email and all will be human to human interaction</p>
             </div>
         </form>
         <div id="overlay" class="overlay"></div>
@@ -902,13 +944,13 @@
                 alert("Coupon Code is missing!, Click on copy button near coupon code");
                 formDisplay("hide")
                 setTimeout(() => {
-                    document.getElementById('membership').scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('offers').scrollIntoView({ behavior: 'smooth' });
                 }, 300);
                 return;
             }
             public_key=document.getElementById('publicKey').value
             if (!public_key) {
-                alert("Public Key is missing!, Click on 'Generate Keys' button");
+                alert("Public Key is missing!, Click on 'Generate Keys' button and after Key generation click on 'Download'");
                 return;
             }            
             var subject = encodeURIComponent(coupon_code);
