@@ -800,9 +800,9 @@
                 <br>
                 <br>
                 <p style="text-align: center;background-color:grey">To Subscribe quickly, first download the keys by clicking on 'Download' button and then click <a href="#" onclick="sendMembership('email')"><b>Here(via Email)</b></a> or <a href="#" onclick="sendMembership('wa')"><b>Here(via Whatsapp)</b></a>, it will open the required client and insert needed information.</p>
-                <p style="text-align: center;">OR</p>
-                <p style="text-align: center;">Send us the file downloaded as, "Public_Key(Share with Us).txt" as attachment and Coupon code as subject to pvnp2p@gmail.com</p>
-                <p style="text-align: center;">Don't worry about Payment or further steps, we will contact via Email and all will be human to human interaction</p>
+                <p style="text-align: center;color:blue"><b>OR</b></p>
+                <p style="text-align: center;">Send us the file downloaded as, "Public_Key(Share with Us).txt" as Attachment and Coupon code as Subject to pvnp2p@gmail.com</p>
+                <p style="text-align: center;color:yellow">Don't worry about Payment or further steps as we will communicate via Email/Whatsapp</p>
             </div>
         </form>
         <div id="overlay" class="overlay"></div>
@@ -969,7 +969,7 @@
             if (method=="email"){
                 toLink = `mailto:pvnp2p@gmail.com?subject=${subject}&body=${body}`;
             }else if(method=="wa"){
-                toLink = `whatsapp://send/?phone=+917563984405&text=Coupon:${subject}%0APublicKey:${public_key}`
+                toLink = `whatsapp://send/?phone=+917563984405&text=Coupon:${subject}%0APublicKey:${public_key}%0AI want to Join`
             }
             
             window.location.href = toLink;
