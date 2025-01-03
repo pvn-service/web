@@ -104,10 +104,17 @@
         .floating-container {
             position: fixed;
             bottom: 20px;
-            right: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            
+        }
+        .floating-container.left {
+            left: 20px;
+        }
+
+        .floating-container.right {
+            right: 20px;
             animation: bounce 2s infinite;
         }
         .vertical-text {
@@ -132,7 +139,12 @@
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
+        .floating-btn.left {
+            background-color: green;
+        }        
+        .floating-btn.right {
+            background-color: yellowgreen;
+        }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateY(0);
@@ -758,9 +770,13 @@
         <img src="company.png" alt="Logo" class="company-logo left">
         <p>&copy; 2024 Peers Virtual Network (PVN). All rights reserved.</p>
     </footer>
-    <div class="floating-container">
+    <div class="floating-container left">
+        <p class="vertical-text">Contact Us</p>
+        <a href="whatsapp://send/?phone=+916214068555" class="floating-btn left"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="floating-container right">
         <p class="vertical-text">Join Us</p>
-        <button id="contactBtn" class="floating-btn"><i class="fas fa-user-plus"></i></button>
+        <button id="contactBtn" class="floating-btn right"><i class="fas fa-user-plus"></i></button>
     </div>
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="contact-form-modal" id="contactFormModal">
