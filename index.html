@@ -387,8 +387,8 @@
             border-left: none;
             padding: 5px;
             cursor: pointer;
-            color: #007bff;
-            width: 40px;
+            color: #002aff;
+            width: 60px;
         }
         .coupon button:focus, .coupon button:hover {
             background-color: transparent;
@@ -593,7 +593,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-WEEKLY05" readonly>
-                            <button style="color: pink;" onclick="copyCoupon('G-WEEKLY05', this.parentElement)">Copy</button>
+                            <button onclick="copyCoupon('G-WEEKLY05', this.parentElement)">Copy</button>
                         </div>                    
                     </div>
                 </div>
@@ -608,7 +608,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-MONTHLY10" readonly>
-                            <button onclick="copyCoupon('G-MONTHLY10', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <button onclick="copyCoupon('G-MONTHLY10', this.parentElement)">Copy</button>
                             
                         </div>              
                     </div>
@@ -624,7 +624,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-QUARTERLY20" readonly>
-                            <button onclick="copyCoupon('G-QUARTERLY20', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <button onclick="copyCoupon('G-QUARTERLY20', this.parentElement)">Copy</button>
                             
                         </div>                 
                     </div>
@@ -640,7 +640,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-HALFYEARLY35" readonly>
-                            <button onclick="copyCoupon('G-HALFYEARLY35', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <button onclick="copyCoupon('G-HALFYEARLY35', this.parentElement)">Copy</button>
                             
                         </div>                 
                     </div>
@@ -656,7 +656,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="G-YEARLY50" readonly>
-                            <button onclick="copyCoupon('G-YEARLY50', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <button onclick="copyCoupon('G-YEARLY50', this.parentElement)">Copy</button>
                             
                         </div>               
                     </div>
@@ -680,7 +680,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="P-WEEKLY05" readonly>
-                            <button onclick="copyCoupon('P-WEEKLY05', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <button onclick="copyCoupon('P-WEEKLY05', this.parentElement)">Copy</button>
                             
                         </div>                  
                     </div>
@@ -697,7 +697,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="P-MONTHLY10" readonly>
-                            <button onclick="copyCoupon('P-MONTHLY10', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <button onclick="copyCoupon('P-MONTHLY10', this.parentElement)">Copy</button>
                             
                         </div>            
                     </div>
@@ -714,7 +714,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="P-QUARTERLY20" readonly>
-                            <button onclick="copyCoupon('P-QUARTERLY20', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <button onclick="copyCoupon('P-QUARTERLY20', this.parentElement)">Copy</button>
                             
                         </div>                
                     </div>
@@ -731,7 +731,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="P-HALFYEARLY35" readonly>
-                            <button onclick="copyCoupon('P-HALFYEARLY35', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <button onclick="copyCoupon('P-HALFYEARLY35', this.parentElement)">Copy</button>
                             
                         </div>                
                     </div>
@@ -748,7 +748,7 @@
                         </ul>
                         <div class="coupon">
                             <input type="text" value="P-YEARLY50" readonly>
-                            <button onclick="copyCoupon('P-YEARLY50', this.parentElement)"><i class="fas fa-copy"></i></button>
+                            <button onclick="copyCoupon('P-YEARLY50', this.parentElement)">Copy</button>
                             
                         </div>            
                     </div>
@@ -969,7 +969,7 @@
             if (method=="email"){
                 toLink = `mailto:pvnp2p@gmail.com?subject=${subject}&body=${body}`;
             }else if(method=="wa"){
-                toLink = `whatsapp://send/?phone=+917563984405&text=Coupon:${subject}%0APublicKey:${public_key}%0AI want to Join`
+                toLink = `whatsapp://send/?phone=+917563984405&text=Coupon:${subject}%0APublicKey:${public_key}%0A------------%0A%0AI want to Join`
             }
             
             window.location.href = toLink;
