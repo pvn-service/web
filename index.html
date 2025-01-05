@@ -466,7 +466,32 @@
                 transform: translateX(-100%);
             }
         }
-
+        .video-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            flex-wrap: wrap;
+        }
+        .video-wrapper {
+            text-align: left;
+            flex: 1 1 45%;
+            margin: 10px;
+        }
+        video {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+        }
+        .video-wrapper h4 {
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            .video-wrapper {
+                flex: 1 1 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -756,6 +781,25 @@
             </div>
         </section>
         <div class="data-flow"></div> 
+        <h2>How it works?</h2>
+        <br>
+        <div class="video-container">
+            <div class="video-wrapper">
+                <h4>Step 1</h4>
+                <video controls autoplay loop muted>
+                    <source src="pre_steps.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-wrapper">
+                <h4>Step 2</h4>
+                <video controls autoplay loop muted>
+                    <source src="post_steps.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        <div class="data-flow"></div> 
         <br>
         <br>
         <h4 class="highlight">** This Website is completely static i.e we Don't collect any of the data to our system, you can check the source code <a href="https://github.com/pvn-service/web" target="_blank"><b>here</b></a> **</h4>
@@ -856,7 +900,6 @@
                             event.preventDefault();
                             //document.getElementById('successMessage').style.display = 'block';
                             downloadKeys()
-                            form.reset();
                             form.classList.remove('was-validated');
                         }
                         form.classList.add('was-validated');
